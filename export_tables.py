@@ -1,3 +1,7 @@
+#
+# Export tables in a Postgresql schema to csv files
+#
+
 import psycopg2
 import sys
 import argparse
@@ -36,7 +40,6 @@ for t in rs:
     print("Exporting", table_name)
     filename = os.path.join(args.dir,args.user + "." + table_name + ".csv")
     f = open(filename, 'w')
-    #cur.copy_to(f, table_name, sep = "|") f.close()
     rc = cur.copy_expert(
             psycopg2.sql.SQL("copy (select * from {}  ) to STDOUT WITH CSV HEADER").format(psycopg2.sql.Identifier(table_name)), f, size=64000)
     f.close()
