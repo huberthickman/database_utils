@@ -20,7 +20,7 @@ con = sqlite3.connect(args.dbfilename)
 cur = con.cursor()
 
 df = pandas.read_excel(args.excel_file_name, sheet_name=args.sheetname)
-df.columns = [c.replace(' ', '_').replace('(', '_').replace(')', '').replace('/', '_').lower() for c in df.columns]
+df.columns = [c.replace(' ', '_').replace('(', '_').replace(')', '').replace('/', '_').replace('>','_').replace('=','_').lower() for c in df.columns]
 
 table_name = args.sheetname.lower().replace('-', '_').replace(' ', '_')
 print('Table name is ' + table_name)
